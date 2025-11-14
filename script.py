@@ -28,27 +28,24 @@ def fill_pdf(template_path, output_path, data_dict):
 
 def main():
     df = pd.read_excel(SPREADSHEET)
+    
+    # Debug: Print available columns to verify
+    print("Available columns in Excel file:")
+    print(df.columns.tolist())
+    print("\n")
 
     for idx, row in df.iterrows():
 
         # -------------------------------------------
-        # 🔥 MAP YOUR SPREADSHEET COLUMNS → PDF FIELDS
+        # 🔥 CORRECTED COLUMN MAPPING
         # -------------------------------------------
         data = {
-            "*Account number:": row["Contract Account"],
+            "*Account number:": row["Contract Account"],  # This column exists
             "*Address": f"{row['House No']} {row['Street']}",
             "*Suburb": row["City"],
-
             "*Old Meter Number": row["Device"],
             "Meter Reading": row["Old Meter Readings"],
-
             "*New Meter Number": row["New Meter Number"],
-
-            # Optional fields if needed:
-            # "Comment": row["Status"],
-            # "SDC Name": "ROODEPOORT",
-            # "Installed by": "BRUCE MHLANGA",
-            # "Company": "LIGHTUP ENTERPRISE"
         }
 
         # File name uses Contract Account to be unique
